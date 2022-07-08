@@ -54,6 +54,7 @@
 
 <script>
 import { sendSmsApi, userLoginApi } from '@/api/Login'
+import { mapMutations } from 'vuex'
 export default {
   name: 'index.vue',
   data() {
@@ -76,6 +77,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setUser']),
     async onSubmit() {
       this.$toast.loading({
         message: '加载中...',
@@ -84,9 +86,12 @@ export default {
       })
       try {
         const { data } = await userLoginApi(this.user)
-        console.log(data)
+        // this.$store.commit('setUser', data.data)
+        this.setUser(data.data)
+        this.$toast.success('登录成功')
+        this.$router.replace('/my')
       } catch (error) {
-        console.log(error)
+        this.$toast(error.response.data.message)
       }
       this.$toast.clear()
     },
@@ -97,7 +102,6 @@ export default {
       //     this.isCountShow = true
       //   })
       //   .catch((err) => {
-      //     console.log(err)
       //   })
       try {
         await this.$refs.form.validate('mobile')
@@ -107,10 +111,8 @@ export default {
       this.isCountShow = true
       try {
         const data = await sendSmsApi(this.user.mobile)
-        console.log(data)
         this.$toast.success('发送成功')
       } catch (error) {
-        console.log(error)
         this.$toast.fail('发送失败')
       }
     },

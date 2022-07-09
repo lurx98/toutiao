@@ -47,12 +47,14 @@
         icon-prefix="toutiao"
         icon="shoucang"
         text="收藏"
+        to="/user/collect"
       />
       <van-grid-item
         class="grid-item"
         icon-prefix="toutiao"
         icon="lishi"
         text="历史"
+        to="/user/history"
       />
     </van-grid>
     <van-cell title="消息通知" is-link />

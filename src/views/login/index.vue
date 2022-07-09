@@ -89,7 +89,12 @@ export default {
         // this.$store.commit('setUser', data.data)
         this.setUser(data.data)
         this.$toast.success('登录成功')
-        this.$router.replace('/my')
+        const url = this.$route.query.url
+        if (url) {
+          this.$router.replace(url)
+        } else {
+          this.$router.replace('/my')
+        }
       } catch (error) {
         this.$toast(error.response.data.message)
       }

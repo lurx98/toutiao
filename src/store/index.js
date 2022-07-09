@@ -9,11 +9,11 @@ export default new Vuex.Store({
 
   },
   getters: {
+    token: state => state.user.token
   },
   mutations: {
     setUser(state, data) {
       state.user = data
-      console.log(data)
       setItem(userKey, data)
     }
   },

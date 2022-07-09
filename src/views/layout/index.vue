@@ -1,6 +1,5 @@
 <template>
   <div>
-    layout
     <router-view></router-view>
 
     <van-tabbar route>
@@ -14,15 +13,19 @@
         视频
       </van-tabbar-item>
       <van-tabbar-item replace to="/my" icon="wode" icon-prefix="toutiao">
-        我的
+        {{ token ? '我的' : '未登录' }}
       </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'index.vue',
+  name: 'Layout',
+  computed: {
+    ...mapGetters(['token']),
+  },
 }
 </script>
 

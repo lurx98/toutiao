@@ -10,8 +10,21 @@ import { Image as VanImage } from 'vant'
 import { Grid, GridItem } from 'vant'
 import { Cell, CellGroup } from 'vant'
 import { Dialog } from 'vant'
+import { Tab, Tabs } from 'vant'
+import { Icon } from 'vant'
+import { List } from 'vant'
+import { PullRefresh } from 'vant'
+
+
+import { Popup } from 'vant'
+Vue.use(PullRefresh)
+Vue.use(Popup)
 
 Vue
+    .use(List)
+    .use(Icon)
+    .use(Tab)
+    .use(Tabs)
     .use(NavBar)
     .use(Tabbar)
     .use(TabbarItem)

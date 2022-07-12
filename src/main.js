@@ -6,6 +6,8 @@ import store from './store'
 import './styles/index.less'
 import 'amfe-flexible'
 import '@/vant'
+import '@/utils/day'
+
 Vue.config.productionTip = false
 
 

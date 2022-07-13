@@ -14,9 +14,11 @@ import { Tab, Tabs } from 'vant'
 import { Icon } from 'vant'
 import { List } from 'vant'
 import { PullRefresh } from 'vant'
-
-
 import { Popup } from 'vant'
+import { Search } from 'vant'
+
+Vue.use(Search)
+
 Vue.use(PullRefresh)
 Vue.use(Popup)
 

@@ -58,6 +58,10 @@ const routes = [
     path: '/search',
     component: () => import('@/views/search')
   },
+  {
+    path: "/article/:id",
+    component: () => import('@/views/article')
+  }
 ]
 // 实例化路由对象
 const router = new VueRouter({

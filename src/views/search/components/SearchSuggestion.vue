@@ -38,15 +38,7 @@ export default {
       handler: debounce(function () {
         this.initDate()
       }, 200),
-      // handler() {
-      //   if (this.timer) {
-      //     console.log('ok')
-      //     clearTimeout(this.timer)
-      //   }
-      //   this.timer = setTimeout(() => {
-      //     this.initDate()
-      //   }, 200)
-      // },
+
       immediate: true,
     },
   },

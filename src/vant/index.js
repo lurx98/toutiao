@@ -16,7 +16,11 @@ import { List } from 'vant'
 import { PullRefresh } from 'vant'
 import { Popup } from 'vant'
 import { Search } from 'vant'
+import { Loading } from 'vant'
+import { Divider } from 'vant'
 
+Vue.use(Divider)
+Vue.use(Loading)
 Vue.use(Search)
 
 Vue.use(PullRefresh)

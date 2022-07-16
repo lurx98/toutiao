@@ -49,17 +49,37 @@
           v-html="article.content"
         ></div>
         <van-divider>正文结束</van-divider>
+        <comment-list
+          :source-id="article.art_id"
+          :list="commentList"
+          @totalCount="totalCount = $event"
+          @replyHandle="replyHandle"
+        />
+        <van-popup v-model="isPostShow" position="bottom">
+          <comment-post
+            :article-id="article.art_id"
+            @postSuccess="postSuccess"
+          />
+        </van-popup>
         <!-- 底部区域 -->
         <div class="article-bottom">
-          <van-button class="comment-btn" type="default" round size="small"
+          <van-button
+            class="comment-btn"
+            type="default"
+            round
+            size="small"
+            @click="isPostShow = true"
             >写评论</van-button
           >
-          <van-icon name="comment-o" badge="123" color="#777" />
+          <van-icon name="comment-o" :badge="totalCount" color="#777" />
           <collect-article
             v-model="article.is_collected"
             :articleId="article.art_id"
           />
-          <zan-article v-model="article.attitude" :articleId="article.art_id" />
+          <zan-article
+            v-model="article.attitude"
+            :article-id="article.art_id"
+          />
           <van-icon name="share" color="#777777"></van-icon>
         </div>
         <!-- /底部区域 -->
@@ -81,6 +101,13 @@
       </div>
       <!-- /加载失败：其它未知错误（例如网络原因或服务端异常） -->
     </div>
+    <van-popup v-model="isReplyShow" position="bottom" style="height: 100vh">
+      <comment-reply
+        :comment="commentItem"
+        v-if="isReplyShow"
+        @close="isReplyShow = false"
+      ></comment-reply>
+    </van-popup>
   </div>
 </template>
 
@@ -91,15 +118,30 @@ import { mapGetters } from 'vuex'
 import FollowUser from '@/components/FollowUser.vue'
 import CollectArticle from '@/components/CollectArticle.vue'
 import ZanArticle from '@/components/ZanArticle.vue'
+import CommentList from './components/CommentList.vue'
+import CommentPost from './components/CommentPost.vue'
+import CommentReply from '@/views/article/components/CommentReply.vue'
 export default {
   name: 'ArticleIndex',
-  components: { FollowUser, CollectArticle, ZanArticle },
+  components: {
+    FollowUser,
+    CollectArticle,
+    ZanArticle,
+    CommentList,
+    CommentPost,
+    CommentReply,
+  },
 
   data() {
     return {
       article: [],
       articleId: this.$route.params.id,
       stateCode: 1,
+      totalCount: '',
+      isPostShow: false,
+      isReplyShow: false,
+      commentList: [],
+      commentItem: {},
     }
   },
   computed: {
@@ -134,10 +176,17 @@ export default {
         console.log(error)
       }
     },
-    // updateFollow(val) {
-    //   console.log('ok')
-    //   this.article.is_followed = val
-    // },
+
+    postSuccess(val) {
+      this.commentList.unshift(val)
+      this.isPostShow = false
+      this.totalCount++
+    },
+    replyHandle(val) {
+      console.log(val)
+      this.commentItem = val
+      this.isReplyShow = true
+    },
   },
 }
 </script>

@@ -57,6 +57,7 @@ export default {
         this.$emit('postSuccess', data.data.new_obj)
       } catch (error) {
         console.log(error)
+        this.$toast.fail(error.response.data.message)
       }
     },
   },

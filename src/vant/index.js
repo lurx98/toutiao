@@ -18,7 +18,11 @@ import { Popup } from 'vant'
 import { Search } from 'vant'
 import { Loading } from 'vant'
 import { Divider } from 'vant'
+import { Picker } from 'vant'
+import { DatetimePicker } from 'vant'
 
+Vue.use(DatetimePicker)
+Vue.use(Picker)
 Vue.use(Divider)
 Vue.use(Loading)
 Vue.use(Search)

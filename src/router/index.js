@@ -61,6 +61,13 @@ const routes = [
   {
     path: "/article/:id",
     component: () => import('@/views/article')
+  },
+  {
+    path: "/user/edit/",
+    component: () => import('@/views/user/UserEdit.vue'),
+    meta: {
+      needLogin: true
+    }
   }
 ]
 // 实例化路由对象
